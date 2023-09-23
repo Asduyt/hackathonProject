@@ -57,7 +57,7 @@ function encrypt(word){
   var tempWord = word;
 
   for (let i = 0; i < word.length; i++){
-    var letter = word.charat(i);
+    var letter = word.charAt(i);
     var asciiNum = letter.charCodeAt(i);
     var newNum = asciiNum + 2;
     if(asciiNum < 91 && asciiNum > 64){
