@@ -74,14 +74,6 @@ function App() {
           </button>
         </div>
       </form>
-
-      <table>
-        <tr>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Gender</th>
-        </tr>
-      </table>
     </div>
   );
 }
