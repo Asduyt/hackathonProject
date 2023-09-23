@@ -222,6 +222,7 @@ Grocery List
 .grocery-form {
   display: flex;
   justify-content: center;
+  padding-top: 1.0rem;
 }
 
 .crypt-title h3 {

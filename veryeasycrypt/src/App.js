@@ -1,12 +1,15 @@
 
 import React, { useState, useEffect } from 'react'
 
+let input;
+
 function App() {
   const [word, setWord] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    input = word;
     setPassword(encrypt());
 
   }
@@ -30,21 +33,26 @@ function App() {
           </button>
         </div>
       </form>
-      <div className="form-control">
-        <input
-          type="text"
-          className="grocery"
-          value={password}
-          placeholder="bananas"
-          disabled="disabled"
-        />
-      </div>
+      <form className="grocery-form">
+        <div className="form-control">
+          <input
+            type="text"
+            className="grocery"
+            placeholder="bananas"
+            value={password}
+            disabled="disabled"
+          />
+          <button type="submit" className="submit-btn">
+            RESET
+          </button>
+        </div>
+      </form>
     </div>
   );
 }
 
 function encrypt() {
-  return "yo";
+  return input+"as";
 }
 
 export default App;
