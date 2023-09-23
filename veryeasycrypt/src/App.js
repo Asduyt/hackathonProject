@@ -9,7 +9,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    input = word;
+    input = banan;
     setPassword(encrypt());
 
   }
