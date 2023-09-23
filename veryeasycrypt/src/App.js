@@ -77,7 +77,7 @@ function App() {
     </div>
   );
 }
-//sdfsdfsdfsdfsdf
+
 function encrypt(word){
 
   var encryptedWord = word;
