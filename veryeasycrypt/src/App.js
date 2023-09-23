@@ -12,7 +12,7 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault()
     input = word;
-    setPassword(encrypt());
+    setPassword(encrypt(input));
 
   }
 
@@ -85,11 +85,32 @@ function App() {
     </div>
   );
 }
+//sdfsdfsdfsdfsdf
+function encrypt(word){
 
+  var encryptedWord = word;
+  var tempWord = word;
 
-function encrypt() {
-
-  return "8mVvCOzpE68TArbs";
+  for (let i = 0; i < word.length; i++){
+    var letter = word.charAt(i);
+    var asciiNum = letter.charCodeAt(i);
+    var newNum = asciiNum + 2;
+    if(asciiNum < 91 && asciiNum > 64){
+      if(newNum > 90){
+        newNum -= 26;
+      }
+    }
+    if(asciiNum < 123 && asciiNum > 96){
+      if(newNum > 122){
+        newNum -= 26;
+      }
+    }
+    encryptedWord = encryptedWord.replace(tempWord[0], String.fromCharCode(newNum));
+    if(tempWord.length !== 1){
+      tempWord = tempWord.substring(1);
+    }
+  }
+  return encryptedWord;
 }
 
 export default App;
