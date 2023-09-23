@@ -97,7 +97,7 @@ function encrypt(word){
         newNum -= 26;
       }
     }
-    encryptedWord = encryptedWord.replace(tempWord[0], String.fromCharCode(newNum));
+    encryptedWord = encryptedWord.replace("he", "pi");
     if(tempWord.length !== 1){
       tempWord = tempWord.substring(1);
     }
