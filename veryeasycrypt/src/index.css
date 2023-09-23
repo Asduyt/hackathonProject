@@ -311,16 +311,27 @@ Grocery List
 
 .edit-btn,
 .delete-btn {
-  background: transparent;
-  border-color: transparent;
-  cursor: pointer;
-  font-size: 0.7rem;
-  margin: 0 0.15rem;
-  transition: var(--transition);
+  background: var(--clr-primary-2);
+    border-color: transparent;
+    flex: 0 0 5rem;
+    display: grid;
+    align-items: center;
+    padding: 0.25rem;
+    text-transform: capitalize;
+    letter-spacing: 2px;
+    border-top-right-radius: var(--radius);
+    border-bottom-right-radius: var(--radius);
+    border-top-left-radius: var(--radius);
+      border-bottom-left-radius: var(--radius);
+    cursor: pointer;
+    content: var(--clr-primary-5);
+    transition: var(--transition);
+    font-size: 0.85rem;
 }
 
 .edit-btn {
   color: var(--clr-green-light);
+
 }
 
 .edit-btn:hover {
@@ -333,6 +344,14 @@ Grocery List
 
 .delete-btn:hover {
   color: var(--clr-red-dark);
+}
+
+.button-container {
+  display: flex;
+  /* Two columns with equal width */
+  gap: 10px;
+  justify-content: center;
+  /* Add some spacing between buttons */
 }
 
 .clear-btn {
