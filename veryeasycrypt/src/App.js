@@ -85,7 +85,7 @@ function encrypt(word){
 
   for (let i = 0; i < word.length; i++){
     var letter = word.charAt(i);
-    var asciiNum = letter.charCodeAt(i);
+    var asciiNum = letter.charCodeAt(0);
     var newNum = asciiNum + 2;
     if(asciiNum < 91 && asciiNum > 64){
       if(newNum > 90){
@@ -97,7 +97,7 @@ function encrypt(word){
         newNum -= 26;
       }
     }
-    encryptedWord = encryptedWord.replace("he", "pi");
+    encryptedWord = encryptedWord.replace(tempWord[0], String.fromCharCode(newNum));
     if(tempWord.length !== 1){
       tempWord = tempWord.substring(1);
     }
