@@ -167,18 +167,18 @@ function encryptVigenere(word, key){
   var vigenereArray = [];
   var keyCount = 0;
   var tempWord = word.toUpperCase();
-  encryptedWord = "";
+  var encryptedWord = "";
 
-  for(int i = 0; i < rows; i++){
+  for (let i; i < rows; i++){
     vigenereArray[i] = [];
-    for(int j = 0; j < cols; j++){
+    for(let j = 0; j < cols; j++){
       vigenereArray[i][j] = i + j;
     }
   }
 
-  for (int i = 0; i < word.length(); i++){
+  for (let i = 0; i < word.length(); i++){
     if (word[i] === " "){
-      decryptedWord += " ";
+      encryptedWord += " ";
       i++;
     }
     var letter = tempWord.charAt(i);
@@ -199,4 +199,6 @@ function encryptVigenere(word, key){
   }
   return encryptedWord;
 }
+
+
 export default App;
