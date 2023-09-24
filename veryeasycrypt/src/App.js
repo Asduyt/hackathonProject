@@ -21,6 +21,8 @@ function App() {
   const [password, setPassword] = useState("");
   const [isEncrypted, setIsEncrypted] = useState(true);
   const [encryptionType, setType] = useState("Caesar Cipher");
+  const [vigenere, setVigenere] = useState(false);
+  const [key, setKey] = useState("");
 
   const handleSave = (e) => {
     e.preventDefault();
@@ -33,6 +35,7 @@ function App() {
       setList([...list, newItem]);
       setWord("");
       setPassword("");
+      setKey("");
     }
   };
 
@@ -41,19 +44,37 @@ function App() {
     input = word;
     if (isEncrypted) {
       if (encryptionType === "Caesar Cipher") {
+        setVigenere(false);
         setPassword(encryptCaesar(input));
       } else if (encryptionType === "Vigenere Cipher") {
-        setPassword(encryptVigenere(input));
+        setVigenere(true);
       } else {
+        setVigenere(false);
         setPassword("8mVvCOzpE68TArbs");
       }
     } else {
       if (encryptionType === "Caesar Cipher") {
+        setVigenere(false);
         setPassword(decryptCaesar(input));
       } else if (encryptionType === "Vigenere Cipher") {
-        setPassword(decryptVigenere(input));
+        setVigenere(true);
       } else {
+        setVigenere(false);
         setPassword("8mVvCOzpE68TArbs");
+      }
+    }
+  };
+
+  const handleKey = (e) => {
+    e.preventDefault();
+    input = word;
+    if (isEncrypted) {
+      if (encryptionType === "Vigenere Cipher") {
+        setPassword(encryptVigenere(input, key));
+      }
+    } else {
+      if (encryptionType === "Vigenere Cipher") {
+        setPassword(decryptVigenere(input, key));
       }
     }
   };
@@ -62,8 +83,10 @@ function App() {
     //e.preventDefault()
     if (id === "encrypt") {
       setIsEncrypted(true);
+      setVigenere(false);
     } else {
       setIsEncrypted(false);
+      setVigenere(false);
     }
     setWord("");
     setPassword("");
@@ -71,6 +94,8 @@ function App() {
 
   const changeType = (e) => {
     setType(e.target.value);
+    setKey("");
+    setVigenere(false);
   };
 
   const viewItem = () => {
@@ -123,6 +148,22 @@ function App() {
           </button>
         </div>
       </form>
+      {vigenere && (
+        <form className="grocery-form" onSubmit={handleKey}>
+          <div className="form-control">
+            <input
+              type="text"
+              className="grocery"
+              placeholder="Vigenere Key"
+              value={key}
+              onChange={(e) => setKey(e.target.value)}
+            />
+            <button type="submit" className="submit-btn">
+              ENTER KEY
+            </button>
+          </div>
+        </form>
+      )}
       <form className="grocery-form">
         <div className="form-control">
           <input
@@ -229,7 +270,7 @@ function decryptCaesar(word) {
 }
 
 //Encrypt a given word using a Vigenere Cypher with a key of 2
-function encryptVigenere(word, key = "basketball") {
+function encryptVigenere(word, key) {
   var rows = 26;
   var cols = 26;
   var vigenereArray = [];
@@ -267,7 +308,7 @@ function encryptVigenere(word, key = "basketball") {
     }
     encryptedWord += String.fromCharCode(newNum);
     keyCount++;
-    if (keyCount === key.length){
+    if (keyCount === key.length) {
       keyCount = 0;
     }
   }
@@ -276,33 +317,34 @@ function encryptVigenere(word, key = "basketball") {
 
 //Decrypt a given word using a Vigenere Cypher with a key of 2
 function decryptVigenere(word, key) {
-
   var keyCount = 0;
   var tempWord = word.toUpperCase();
   var decryptedWord = "";
 
-  for (let i = 0; i < word.length; i++){
-    if (word[i] === " "){
+  for (let i = 0; i < word.length; i++) {
+    if (word[i] === " ") {
       decryptedWord += " ";
       i++;
     }
     var letter = tempWord.charAt(i);
     var wordNum = letter.charCodeAt(0) - 65;
-    var keyLetter = (key.toUpperCase()).charAt(keyCount);
+    var keyLetter = key.toUpperCase().charAt(keyCount);
     var keyNum = keyLetter.charCodeAt(0) - 65;
     var newNum = wordNum - keyNum;
-    if (newNum < 25){
+    if (newNum < 25) {
       newNum += 26;
     }
-    if ((word.charAt(i)).charCodeAt(0) > 64 && (word.charAt(i)).charCodeAt(0) < 91){
+    if (
+      word.charAt(i).charCodeAt(0) > 64 &&
+      word.charAt(i).charCodeAt(0) < 91
+    ) {
       newNum += 65;
-    }
-    else{
+    } else {
       newNum += 97;
     }
     decryptedWord += String.fromCharCode(newNum);
     keyCount++;
-    if (keyCount === key.length){
+    if (keyCount === key.length) {
       keyCount = 0;
     }
   }

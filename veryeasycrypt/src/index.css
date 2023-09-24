@@ -354,7 +354,6 @@ Grocery List
   padding: 0.5rem 1rem;
   border-radius: var(--radius);
   background: var(--clr-grey-9);
-  text-transform: capitalize;
 
 }
 
