@@ -221,6 +221,10 @@ function encryptVigenere(word){
       newNum += 97;
     }
     encryptedWord += String.fromCharCode(newNum);
+    keyCount++;
+    if (keyCount === 4){
+      keyCount = 0;
+    }
   }
   return encryptedWord;
 }
