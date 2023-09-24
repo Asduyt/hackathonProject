@@ -185,7 +185,7 @@ function decryptCaesar(word) {
   return decryptedWord;
 }
 
-function encryptVigenere(word, key){
+function encryptVigenere(word){
   var rows = 26;
   var cols = 26;
   var vigenereArray = [];
