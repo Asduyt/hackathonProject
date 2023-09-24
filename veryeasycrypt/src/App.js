@@ -298,7 +298,7 @@ function decryptVigenere(word, key) {
     else{
       newNum += 97;
     }
-    encryptedWord += String.fromCharCode(newNum);
+    decryptedWord += String.fromCharCode(newNum);
     keyCount++;
     if (keyCount === key.length){
       keyCount = 0;
