@@ -185,21 +185,11 @@ function decryptCaesar(word) {
   return decryptedWord;
 }
 
-function encryptVigenere(word){
-  var rows = 26;
-  var cols = 26;
-  var vigenereArray = [];
+function encryptVigenere(word, key){
+
   var keyCount = 0;
   var tempWord = word.toUpperCase();
   var encryptedWord = "";
-  var randomWord = "ASUS";
-
-  for (let i; i < rows; i++){
-    vigenereArray[i] = [];
-    for(let j = 0; j < cols; j++){
-      vigenereArray[i][j] = i + j;
-    }
-  }
 
   for (let i = 0; i < word.length; i++){
     if (word[i] === " "){
@@ -208,7 +198,7 @@ function encryptVigenere(word){
     }
     var letter = tempWord.charAt(i);
     var wordNum = letter.charCodeAt(0) - 65;
-    var keyLetter = (randomWord.toUpperCase()).charAt(keyCount);
+    var keyLetter = (key.toUpperCase()).charAt(keyCount);
     var keyNum = keyLetter.charCodeAt(0) - 65;
     var newNum = wordNum + keyNum;
     if (newNum > 25){
@@ -222,15 +212,45 @@ function encryptVigenere(word){
     }
     encryptedWord += String.fromCharCode(newNum);
     keyCount++;
-    if (keyCount === 4){
+    if (keyCount === key.length){
       keyCount = 0;
     }
   }
   return encryptedWord;
 }
 
-function decryptVigenere() {
-  return "idk";
+function decryptVigenere(word, key) {
+
+  var keyCount = 0;
+  var tempWord = word.toUpperCase();
+  var decryptedWord = "";
+
+  for (let i = 0; i < word.length; i++){
+    if (word[i] == " "){
+      decryptedWord += " ";
+      i++;
+    }
+    var letter = tempWord.charAt(i);
+    var wordNum = letter.charCodeAt(0) - 65;
+    var keyLetter = (key.toUpperCase()).charAt(keyCount);
+    var keyNum = keyLetter.charCodeAt(0) - 65;
+    var newNum = wordNum - keyNum;
+    if (newNum < 25){
+      newNum += 26;
+    }
+    if ((word.charAt(i)).charCodeAt(0) > 64 && (word.charAt(i)).charCodeAt(0) < 91){
+      newNum += 65;
+    }
+    else{
+      newNum += 97;
+    }
+    encryptedWord += String.fromCharCode(newNum);
+    keyCount++;
+    if (keyCount === key.length){
+      keyCount = 0;
+    }
+  }
+  return decryptedWord;
 }
 
 
