@@ -192,6 +192,19 @@ Grocery List
     /* Add gap between articles */
   }
 
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .section-center {
   background: var(--clr-white);
   border-radius: var(--radius);

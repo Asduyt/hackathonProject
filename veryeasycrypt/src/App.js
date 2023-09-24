@@ -4,6 +4,7 @@ import List from "./List";
 
 let input;
 let output;
+let key = "basketball";
 
 const getLocalStorage = () => {
   let list = localStorage.getItem("list");
@@ -42,8 +43,8 @@ function App() {
     if (isEncrypted) {
       if (encryptionType === "Caesar Cipher") {
         setPassword(encryptCaesar(input));
-      } else if (encryptionType === "Vigenere Cipher") {
-        setPassword(encryptVigenere(input));
+      } else if (encryptionType === "Vigenere Cipher") {    
+        setPassword(encryptVigenere(input, "basketball"));
       } else {
         setPassword("8mVvCOzpE68TArbs");
       }
@@ -51,7 +52,7 @@ function App() {
       if (encryptionType === "Caesar Cipher") {
         setPassword(decryptCaesar(input));
       } else if (encryptionType === "Vigenere Cipher") {
-        setPassword(decryptVigenere(input));
+        setPassword(decryptVigenere(input, "basketball"));
       } else {
         setPassword("8mVvCOzpE68TArbs");
       }
@@ -140,7 +141,9 @@ function App() {
       <form onSubmit={handleSave}>
         <button className="clear-btn">Save</button>
       </form>
-      <p>{list.length}</p>
+
+      {}
+
       {list.length > 0 && (
         <div className="grocery-container">
           <List
@@ -243,7 +246,7 @@ function encryptVigenere(word, key) {
     }
   }
 
-  for (let i = 0; i < word.length(); i++) {
+  for (let i = 0; i < word.length; i++) {
     if (word[i] === " ") {
       encryptedWord += " ";
       i++;
@@ -298,7 +301,7 @@ function decryptVigenere(word, key) {
     else{
       newNum += 97;
     }
-    encryptedWord += String.fromCharCode(newNum);
+    decryptedWord += String.fromCharCode(newNum);
     keyCount++;
     if (keyCount === key.length){
       keyCount = 0;
