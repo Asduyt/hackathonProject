@@ -1,25 +1,51 @@
 import React, { useState, useEffect } from "react";
-import DropdownMenu from './Dropdown';
+import DropdownMenu from "./Dropdown";
+import List from "./List";
 
 let input;
 let output;
 
+const getLocalStorage = () => {
+  let list = localStorage.getItem("list");
+  if (list) {
+    return JSON.parse(list);
+  } else {
+    return [];
+  }
+};
+
 function App() {
+  const [list, setList] = useState(getLocalStorage([]));
   const [word, setWord] = useState("");
+  const [view, setView] = useState(false);
   const [password, setPassword] = useState("");
   const [isEncrypted, setIsEncrypted] = useState(true);
   const [encryptionType, setType] = useState("Caesar Cipher");
 
+  const handleSave = (e) => {
+    e.preventDefault();
+    if (word && password) {
+      const newItem = {
+        id: new Date().getTime().toString(),
+        title: word,
+        value: password,
+      };
+      setList([...list, newItem]);
+      setWord("");
+      setPassword("");
+    }
+  };
+
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     input = word;
     if (isEncrypted) {
-            if (encryptionType === "Caesar Cipher"){  
+      if (encryptionType === "Caesar Cipher") {
         setPassword(encryptCaesar(input));
-      } else if(encryptionType === "Vigenere Cipher"){
+      } else if (encryptionType === "Vigenere Cipher") {
         setPassword(encryptVigenere(input));
       } else {
-        setPassword("lol");
+        setPassword("8mVvCOzpE68TArbs");
       }
     } else {
       if (encryptionType === "Caesar Cipher") {
@@ -27,7 +53,7 @@ function App() {
       } else if (encryptionType === "Vigenere Cipher") {
         setPassword(decryptVigenere(input));
       } else {
-        setPassword("lol");
+        setPassword("8mVvCOzpE68TArbs");
       }
     }
   };
@@ -46,6 +72,18 @@ function App() {
   const changeType = (e) => {
     setType(e.target.value);
   };
+
+  const viewItem = () => {
+    setView(!view);
+  };
+
+  const removeItem = (id) => {
+    setList(list.filter((item) => item.id !== id));
+  };
+
+  useEffect(() => {
+    localStorage.setItem("list", JSON.stringify(list));
+  }, [list]);
 
   return (
     <div>
@@ -69,7 +107,7 @@ function App() {
         </button>
       </div>
 
-      <DropdownMenu changeType={changeType}/>
+      <DropdownMenu changeType={changeType} />
 
       <form className="grocery-form" onSubmit={handleSubmit}>
         <div className="form-control">
@@ -99,9 +137,20 @@ function App() {
           </button>
         </div>
       </form>
-      <button className="clear-btn">
-        Save
-      </button>
+      <form onSubmit={handleSave}>
+        <button className="clear-btn">Save</button>
+      </form>
+      <p>{list.length}</p>
+      {list.length > 0 && (
+        <div className="grocery-container">
+          <List
+            items={list}
+            removeItem={removeItem}
+            viewItem={viewItem}
+            view={view}
+          />
+        </div>
+      )}
     </div>
   );
 }
@@ -112,9 +161,8 @@ function encryptCaesar(word) {
 
   //Iterate through each letter of the word
   for (let i = 0; i < word.length; i++) {
-
     //Account for spaces
-    if (word[i] === " "){
+    if (word[i] === " ") {
       encryptedWord += " ";
       i++;
     }
@@ -124,7 +172,6 @@ function encryptCaesar(word) {
 
     //Check if the char is lowercase
     if (asciiNum < 91 && asciiNum > 64) {
-
       //Check if the char is out of bounds and fix it
       if (newNum > 90) {
         newNum -= 26;
@@ -133,7 +180,6 @@ function encryptCaesar(word) {
 
     //Check if the char is uppercase
     if (asciiNum < 123 && asciiNum > 96) {
-
       //Check if the char is out of bounds and fix it
       if (newNum > 122) {
         newNum -= 26;
@@ -152,9 +198,8 @@ function decryptCaesar(word) {
 
   ////Iterate through each letter of the string
   for (let i = 0; i < word.length; i++) {
-    
     //Account for spaces
-    if (word[i] === " "){
+    if (word[i] === " ") {
       decryptedWord += " ";
       i++;
     }
@@ -164,7 +209,6 @@ function decryptCaesar(word) {
 
     //Check if the char is lowercase
     if (asciiNum < 91 && asciiNum > 64) {
-
       //Check if the char is out of bounds and fix it
       if (newNum < 65) {
         newNum += 26;
@@ -172,7 +216,6 @@ function decryptCaesar(word) {
     }
     //Check if the char is uppercase
     else if (asciiNum < 123 && asciiNum > 96) {
-
       //Check if the char is out of bounds and fix it
       if (newNum < 97) {
         newNum += 26;
@@ -185,7 +228,7 @@ function decryptCaesar(word) {
   return decryptedWord;
 }
 
-function encryptVigenere(word, key){
+function encryptVigenere(word, key) {
   var rows = 26;
   var cols = 26;
   var vigenereArray = [];
@@ -193,30 +236,32 @@ function encryptVigenere(word, key){
   var tempWord = word.toUpperCase();
   var encryptedWord = "";
 
-  for (let i; i < rows; i++){
+  for (let i; i < rows; i++) {
     vigenereArray[i] = [];
-    for(let j = 0; j < cols; j++){
+    for (let j = 0; j < cols; j++) {
       vigenereArray[i][j] = i + j;
     }
   }
 
-  for (let i = 0; i < word.length(); i++){
-    if (word[i] === " "){
+  for (let i = 0; i < word.length(); i++) {
+    if (word[i] === " ") {
       encryptedWord += " ";
       i++;
     }
     var letter = tempWord.charAt(i);
     var wordNum = letter.charCodeAt(0) - 65;
-    var keyLetter = (key.toUpperCase()).charAt(keyCount);
+    var keyLetter = key.toUpperCase().charAt(keyCount);
     var keyNum = keyLetter.charCodeAt(0) - 65;
     var newNum = wordNum + keyNum;
-    if (newNum > 25){
+    if (newNum > 25) {
       newNum -= 26;
     }
-    if ((word.charAt(i)).charCodeAt(0) > 64 && (word.charAt(i)).charCodeAt(0) < 91){
+    if (
+      word.charAt(i).charCodeAt(0) > 64 &&
+      word.charAt(i).charCodeAt(0) < 91
+    ) {
       newNum += 65;
-    }
-    else{
+    } else {
       newNum += 97;
     }
     encryptedWord += String.fromCharCode(newNum);
@@ -227,6 +272,5 @@ function encryptVigenere(word, key){
 function decryptVigenere() {
   return "idk";
 }
-
 
 export default App;
