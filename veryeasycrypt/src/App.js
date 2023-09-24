@@ -15,13 +15,13 @@ function App() {
     input = word;
     if (isEncrypted) {
       if (encryptionType === "Caesar Cipher"){  
-        setPassword(encrypt(input));
+        setPassword(encryptCaesar(input));
       } else {
         setPassword(encrypt2(input));
       }
     } else {
       if (encryptionType === "Caesar Cipher") {
-        setPassword(decrypt(input));
+        setPassword(decryptCaesar(input));
       } else {
         setPassword(decrypt2(input));
       }
@@ -73,7 +73,7 @@ function App() {
           <input
             type="text"
             className="grocery"
-            placeholder="Enter text"
+            placeholder="bananas"
             value={word}
             onChange={(e) => setWord(e.target.value)}
           />
@@ -87,7 +87,7 @@ function App() {
           <input
             type="text"
             className="grocery"
-            placeholder="Enrypted text"
+            placeholder="bananas"
             value={password}
             disabled="disabled"
           />
@@ -114,7 +114,7 @@ function decrypt2(word) {
   return "blank";
 }
 
-function encrypt(word) {
+function encryptCaesar(word) {
   var encryptedWord = "";
 
   for (let i = 0; i < word.length; i++) {
@@ -140,7 +140,7 @@ function encrypt(word) {
   return encryptedWord;
 }
 
-function decrypt(word) {
+function decryptCaesar(word) {
   var decryptedWord = "";
 
   for (let i = 0; i < word.length; i++) {
@@ -156,7 +156,7 @@ function decrypt(word) {
         newNum += 26;
       }
     }
-    if (asciiNum < 123 && asciiNum > 96) {
+    else if (asciiNum < 123 && asciiNum > 96) {
       if (newNum < 97) {
         newNum += 26;
       }
@@ -167,4 +167,3 @@ function decrypt(word) {
 }
 
 export default App;
-
