@@ -9,14 +9,10 @@ function App() {
   const [password, setPassword] = useState('');
   const [isEncrypted, setIsEncrypted] = useState(true);
 
-  const handleSubmit = (id) => {
-    //e.preventDefault()
+  const handleSubmit = (e) => {
+    e.preventDefault()
     input = word;
-    if (isEncrypted) {
-      setPassword(encrypt(input));
-    } else {
-      setPassword(decrypt(input));
-    }
+    setPassword(encrypt(input));
 
   }
 
@@ -103,6 +99,28 @@ function encrypt(word){
     encryptedWord += String.fromCharCode(newNum);
   }
   return encryptedWord;
+}
+
+function decrypt(word){
+  var decryptedWord = "";
+
+  for (let i = 0; i < word.length; i++){
+    var letter = word.charAt(i);
+    var asciiNum = letter.charCodeAt(0);
+    var newNum = asciiNum - 2;
+    if(asciiNum < 91 && asciiNum > 64){
+      if(newNum < 65){
+        newNum += 26;
+      }
+    }
+    if(asciiNum < 123 && asciiNum > 96){
+      if(newNum < 97){
+        newNum += 26;
+      }
+    }
+    decryptedWord += String.fromCharCode(newNum);
+  }
+  return decryptedWord;
 }
 
 export default App;
