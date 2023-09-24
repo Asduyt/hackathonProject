@@ -80,8 +80,7 @@ function App() {
 
 function encrypt(word){
 
-  var encryptedWord = word;
-  var tempWord = word;
+  var encryptedWord = "";
 
   for (let i = 0; i < word.length; i++){
     var letter = word.charAt(i);
@@ -97,10 +96,7 @@ function encrypt(word){
         newNum -= 26;
       }
     }
-    encryptedWord = encryptedWord.replace(tempWord[0], String.fromCharCode(newNum));
-    if(tempWord.length !== 1){
-      tempWord = tempWord.substring(1);
-    }
+    encryptedWord += String.fromCharCode(newNum);
   }
   return encryptedWord;
 }
