@@ -84,6 +84,9 @@ function encrypt(word) {
   var encryptedWord = "";
 
   for (let i = 0; i < word.length; i++) {
+    if (word[i] == " "){
+      i++;
+    }
     var letter = word.charAt(i);
     var asciiNum = letter.charCodeAt(0);
     var newNum = asciiNum + 2;
@@ -106,6 +109,9 @@ function decrypt(word) {
   var decryptedWord = "";
 
   for (let i = 0; i < word.length; i++) {
+    if (word[i] == " "){
+      i++;
+    }
     var letter = word.charAt(i);
     var asciiNum = letter.charCodeAt(0);
     var newNum = asciiNum - 2;
