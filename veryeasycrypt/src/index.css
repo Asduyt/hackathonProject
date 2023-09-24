@@ -225,18 +225,61 @@ Grocery List
   padding-top: 1.0rem;
 }
 
-.crypt-title h3 {
+.crypt-title h2 {
   color: var(--clr-primary-1);
   margin-bottom: 1.5rem;
   text-align: center;
-  padding-top: 4.0rem;
-  padding-bottom: 3.0rem;
+  padding-top: 5.0rem;
+  padding-bottom: 2.5rem;
 }
 
 .form-control {
   display: flex;
   justify-content: center;
   width: 50%;
+}
+
+.dropdown-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 1.0rem;
+
+  background: --clr-grey-4;
+}
+
+.dropdown-toggle {
+  background: var(--clr-primary-8);
+  border-color: transparent;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  padding-left: 2.0rem;
+  padding-right: 2.0rem;
+  text-transform: capitalize;
+  letter-spacing: 2px;
+  border-top-right-radius: var(--radius);
+  border-bottom-right-radius: var(--radius);
+  border-top-left-radius: var(--radius);
+  border-bottom-left-radius: var(--radius);
+  content: var(--clr-primary-5);
+  transition: var(--transition);
+  font-size: 0.85rem;
+  margin-left: 2.0rem;
+  margin-right: 2.0rem;
+  margin-bottom: 3.0rem;
+}
+
+.dropdown-menu {
+  font-size: 0.85rem;
+}
+
+.dropdown-below {
+  width: 100%;
+}
+
+.dropdown-option {
+  font-size: 0.85rem;
 }
 
 .grocery {
@@ -360,7 +403,7 @@ Grocery List
   height: 1.5rem;
   display: grid;
   align-items: center;
-  background: transparent;
+  background: var(--clr-grey-8);
   border-color: transparent;
   color: var(--clr-red-light);
   margin: 0 auto;

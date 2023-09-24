@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import DropdownMenu from './Dropdown';
 
 let input;
 let output;
@@ -7,14 +8,23 @@ function App() {
   const [word, setWord] = useState("");
   const [password, setPassword] = useState("");
   const [isEncrypted, setIsEncrypted] = useState(true);
+  const [encryptionType, setType] = useState("Caesar Cipher");
 
   const handleSubmit = (e) => {
     e.preventDefault()
     input = word;
     if (isEncrypted) {
-      setPassword(encrypt(input));
+      if (encryptionType === "Caesar Cipher"){  
+        setPassword(encrypt(input));
+      } else {
+        setPassword(encrypt2(input));
+      }
     } else {
-      setPassword(decrypt(input));
+      if (encryptionType === "Caesar Cipher") {
+        setPassword(decrypt(input));
+      } else {
+        setPassword(decrypt2(input));
+      }
     }
   };
 
@@ -29,10 +39,14 @@ function App() {
     setPassword("");
   };
 
+  const changeType = (e) => {
+    setType(e.target.value);
+  }
+
   return (
     <div>
       <div className="crypt-title">
-        <h3>VeryEasyCrypt</h3>
+        <h2>VeryEasyCrypt</h2>
       </div>
       <div className="button-container">
         <button
@@ -50,6 +64,10 @@ function App() {
           DECRYPT
         </button>
       </div>
+
+      <DropdownMenu changeType={changeType}/>
+
+
       <form className="grocery-form" onSubmit={handleSubmit}>
         <div className="form-control">
           <input
@@ -78,8 +96,22 @@ function App() {
           </button>
         </div>
       </form>
+
+      <button className="clear-btn">
+        Save
+      </button>
+
+
     </div>
   );
+}
+
+function encrypt2(word) {
+  return "blank";
+}
+
+function decrypt2(word) {
+  return "blank";
 }
 
 function encrypt(word) {
