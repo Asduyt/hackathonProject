@@ -275,7 +275,7 @@ function encryptVigenere(word, key = "basketball") {
 }
 
 //Decrypt a given word using a Vigenere Cypher with a key of 2
-function decryptVigenere(word, key) {
+function decryptVigenere(word, key = "basketball") {
 
   var keyCount = 0;
   var tempWord = word.toUpperCase();
@@ -291,7 +291,7 @@ function decryptVigenere(word, key) {
     var keyLetter = (key.toUpperCase()).charAt(keyCount);
     var keyNum = keyLetter.charCodeAt(0) - 65;
     var newNum = wordNum - keyNum;
-    if (newNum < 25){
+    if (newNum < 0){
       newNum += 26;
     }
     if ((word.charAt(i)).charCodeAt(0) > 64 && (word.charAt(i)).charCodeAt(0) < 91){
