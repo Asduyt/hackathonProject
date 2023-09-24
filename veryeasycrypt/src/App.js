@@ -102,3 +102,4 @@ function encrypt(word){
 }
 
 export default App;
+
