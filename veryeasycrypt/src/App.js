@@ -87,6 +87,7 @@ function encrypt(word) {
 
   for (let i = 0; i < word.length; i++) {
     if (word[i] === " "){
+      decryptedWord += " ";
       i++;
     }
     var letter = word.charAt(i);
@@ -112,6 +113,7 @@ function decrypt(word) {
 
   for (let i = 0; i < word.length; i++) {
     if (word[i] === " "){
+      decryptedWord += " ";
       i++;
     }
     var letter = word.charAt(i);
