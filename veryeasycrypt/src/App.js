@@ -9,10 +9,14 @@ function App() {
   const [password, setPassword] = useState('');
   const [isEncrypted, setIsEncrypted] = useState(true);
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
+  const handleSubmit = (id) => {
+    //e.preventDefault()
     input = word;
-    setPassword(encrypt(input));
+    if (isEncrypted) {
+      setPassword(encrypt(input));
+    } else {
+      setPassword(decrypt(input));
+    }
 
   }
 
