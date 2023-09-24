@@ -192,6 +192,7 @@ function encryptVigenere(word, key){
   var keyCount = 0;
   var tempWord = word.toUpperCase();
   var encryptedWord = "";
+  randomWord = "ASUS";
 
   for (let i; i < rows; i++){
     vigenereArray[i] = [];
@@ -207,7 +208,7 @@ function encryptVigenere(word, key){
     }
     var letter = tempWord.charAt(i);
     var wordNum = letter.charCodeAt(0) - 65;
-    var keyLetter = (key.toUpperCase()).charAt(keyCount);
+    var keyLetter = (randomWord.toUpperCase()).charAt(keyCount);
     var keyNum = keyLetter.charCodeAt(0) - 65;
     var newNum = wordNum + keyNum;
     if (newNum > 25){
