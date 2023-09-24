@@ -51,7 +51,7 @@ function App() {
           <input
             type="text"
             className="grocery"
-            placeholder="bananas"
+            placeholder="Enter text"
             value={word}
             onChange={(e) => setWord(e.target.value)}
           />
@@ -65,7 +65,7 @@ function App() {
           <input
             type="text"
             className="grocery"
-            placeholder="bananas"
+            placeholder="Enrypted text"
             value={password}
             disabled="disabled"
           />
