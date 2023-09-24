@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function DropdownMenu({ changeType }) {
-  const options = ["Caesar Cipher", "Second Cipher", "Substitution Cipher", "Polyalphabetic Cipher"]; // Replace with your dropdown options
+  const options = ["Caesar Cipher", "Vigenere Cipher", "Substitution Cipher", "Polyalphabetic Cipher"]; // Replace with your dropdown options
 
   return (
     <div className="dropdown-container">
