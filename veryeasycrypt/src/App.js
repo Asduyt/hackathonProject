@@ -1,21 +1,22 @@
-
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from "react";
 
 let input;
 let output;
 
 function App() {
-  const [word, setWord] = useState('');
-  const [password, setPassword] = useState('');
+  const [word, setWord] = useState("");
+  const [password, setPassword] = useState("");
   const [isEncrypted, setIsEncrypted] = useState(true);
 
   const handleSubmit = (id) => {
     //e.preventDefault()
     input = word;
-    
-    setPassword(encrypt(input));
-
-  }
+    if (isEncrypted) {
+      setPassword(encrypt(input));
+    } else {
+      setPassword(decrypt(input));
+    }
+  };
 
   const handleType = (id) => {
     //e.preventDefault()
@@ -24,7 +25,9 @@ function App() {
     } else {
       setIsEncrypted(false);
     }
-  }
+    setWord("");
+    setPassword("");
+  };
 
   return (
     <div>
@@ -75,43 +78,52 @@ function App() {
           </button>
         </div>
       </form>
-
-      <table>
-        <tr>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Gender</th>
-        </tr>
-      </table>
     </div>
   );
 }
-//sdfsdfsdfsdfsdf
-function encrypt(word){
 
-  var encryptedWord = word;
-  var tempWord = word;
+function encrypt(word) {
+  var encryptedWord = "";
 
-  for (let i = 0; i < word.length; i++){
+  for (let i = 0; i < word.length; i++) {
     var letter = word.charAt(i);
-    var asciiNum = letter.charCodeAt(i);
+    var asciiNum = letter.charCodeAt(0);
     var newNum = asciiNum + 2;
-    if(asciiNum < 91 && asciiNum > 64){
-      if(newNum > 90){
+    if (asciiNum < 91 && asciiNum > 64) {
+      if (newNum > 90) {
         newNum -= 26;
       }
     }
-    if(asciiNum < 123 && asciiNum > 96){
-      if(newNum > 122){
+    if (asciiNum < 123 && asciiNum > 96) {
+      if (newNum > 122) {
         newNum -= 26;
       }
     }
-    encryptedWord = encryptedWord.replace(tempWord[0], String.fromCharCode(newNum));
-    if(tempWord.length !== 1){
-      tempWord = tempWord.substring(1);
-    }
+    encryptedWord += String.fromCharCode(newNum);
   }
   return encryptedWord;
+}
+
+function decrypt(word) {
+  var decryptedWord = "";
+
+  for (let i = 0; i < word.length; i++) {
+    var letter = word.charAt(i);
+    var asciiNum = letter.charCodeAt(0);
+    var newNum = asciiNum - 2;
+    if (asciiNum < 91 && asciiNum > 64) {
+      if (newNum < 65) {
+        newNum += 26;
+      }
+    }
+    if (asciiNum < 123 && asciiNum > 96) {
+      if (newNum < 97) {
+        newNum += 26;
+      }
+    }
+    decryptedWord += String.fromCharCode(newNum);
+  }
+  return decryptedWord;
 }
 
 export default App;
