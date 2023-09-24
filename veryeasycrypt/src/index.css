@@ -185,6 +185,13 @@ main {
 Grocery List
 ===============
 */
+.grocery-list {
+  display: grid;
+
+    /* Adjust the column width as needed */
+    /* Add gap between articles */
+  }
+
 .section-center {
   background: var(--clr-white);
   border-radius: var(--radius);
@@ -328,17 +335,19 @@ Grocery List
 .grocery-item {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   margin-bottom: 0.5rem;
   transition: var(--transition);
-  padding: 0.25rem 1rem;
+  padding: 0.5rem 1rem;
   border-radius: var(--radius);
+  background: var(--clr-grey-9);
   text-transform: capitalize;
+
 }
 
 .grocery-item:hover {
   color: var(--clr-grey-5);
-  background: var(--clr-grey-10);
+  background: var(--clr-grey-7);
 }
 
 .grocery-item:hover .title {
@@ -387,6 +396,11 @@ Grocery List
 
 .delete-btn:hover {
   color: var(--clr-red-dark);
+}
+
+.btn-container {
+  display: flex;
+  gap: 10px;
 }
 
 .button-container {
