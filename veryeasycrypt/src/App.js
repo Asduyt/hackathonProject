@@ -331,7 +331,7 @@ function decryptVigenere(word, key) {
     var keyLetter = key.toUpperCase().charAt(keyCount);
     var keyNum = keyLetter.charCodeAt(0) - 65;
     var newNum = wordNum - keyNum;
-    if (newNum < 25) {
+    if (newNum < 0) {
       newNum += 26;
     }
     if (
