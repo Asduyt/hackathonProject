@@ -111,7 +111,7 @@ function encryptCaesar(word) {
   var encryptedWord = "";
 
   //Iterate through each letter of the word
-  for (let i = 0; i < word.length; i++) {
+  for (let i = 0; i < word.length(); i++) {
 
     //Account for spaces
     if (word[i] === " "){
@@ -151,7 +151,7 @@ function decryptCaesar(word) {
   var decryptedWord = "";
 
   ////Iterate through each letter of the string
-  for (let i = 0; i < word.length; i++) {
+  for (let i = 0; i < word.length(); i++) {
     
     //Account for spaces
     if (word[i] === " "){
