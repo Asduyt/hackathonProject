@@ -25,6 +25,8 @@ function App() {
     } else {
       setIsEncrypted(false);
     }
+    setWord("");
+    setPassword("");
   };
 
   return (
